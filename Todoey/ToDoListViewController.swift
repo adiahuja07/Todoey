@@ -10,7 +10,7 @@ import UIKit
 
 class ToDoListViewController: UITableViewController {
     
-    let itemArray = ["1", "2", "3"]
+    var itemArray = ["1", "2", "3"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +45,54 @@ class ToDoListViewController: UITableViewController {
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
+//        var textField = UITextField()
+//
+//        let alert = UIAlertController(title: "Add new Todoey Item", message: "", preferredStyle: .alert)
+//
+//        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+//            //What will happen when the person clicks the add item button on our UIAlert
+//            print(textField.text )
+//
+//        }
+//
+//        alert.addTextField { (alertTextField) in
+//            alertTextField.placeholder = "Create new item"
+//            textField = alertTextField
+//        }
+//
+//        alert.addAction(action)
+//
+//        present(alert, animated: true, completion: nil)
+//    }
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add item to Todoey list", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add item", style: .default) { (action) in
+            //What will happen next when the person clicks on the add item button on our UIAlert
+            print(textField.text!)
+            
+            if textField.text?.isEmpty != true {
+            self.itemArray.append(textField.text!)
+            self.tableView.reloadData()
+            }
+            else {
+                print("Textfield is Empty")
+            }
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create new item"
+            textField = alertTextField
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
 }
 
